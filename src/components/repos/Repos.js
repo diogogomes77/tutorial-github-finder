@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useContext } from "react";
 import RepoItem from "./RepoItem";
-import PropTypes from "prop-types";
+import Spinner from "../layout/Spinner";
+//import PropTypes from "prop-types";
+import GithubContext from "../../context/github/githubContext";
 
-const Repos = ({ repos }) => {
-  return repos.map((repo) => <RepoItem repo={repo} key={repo.id} />);
+const Repos = () => {
+  const githubContext = useContext(GithubContext);
+  const { repos, loading } = githubContext;
+  if (loading) {
+    return <Spinner />;
+  } else {
+    return repos.map((repo) => <RepoItem repo={repo} key={repo.id} />);
+  }
 };
 
-Repos.propTypes = {
-  repos: PropTypes.array.isRequired,
-};
+// Repos.propTypes = {
+//   repos: PropTypes.array.isRequired,
+// };
 export default Repos;

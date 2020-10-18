@@ -5,9 +5,9 @@ import Repos from "../repos/Repos";
 import { Link } from "react-router-dom";
 import GithubContext from "../../context/github/githubContext";
 
-const User = ({ getUserRepos, repos, match }) => {
+const User = ({ match }) => {
   const githubContext = useContext(GithubContext);
-  const { getUser, loading, user } = githubContext;
+  const { getUserRepos, repos, user, loading, getUser } = githubContext;
   useEffect(() => {
     getUser(match.params.login); // passing the username argument from url login param
     getUserRepos(match.params.login);
@@ -102,11 +102,11 @@ const User = ({ getUserRepos, repos, match }) => {
   );
 };
 
-User.propTypes = {
-  //loading: PropTypes.bool.isRequired,
-  //user: PropTypes.object.isRequired,
-  repos: PropTypes.array.isRequired,
-  //getUser: PropTypes.func.isRequired,
-  getUserRepos: PropTypes.func.isRequired,
-};
+// User.propTypes = {
+//   //loading: PropTypes.bool.isRequired,
+//   //user: PropTypes.object.isRequired,
+//   repos: PropTypes.array.isRequired,
+//   //getUser: PropTypes.func.isRequired,
+//   getUserRepos: PropTypes.func.isRequired,
+// };
 export default User;
