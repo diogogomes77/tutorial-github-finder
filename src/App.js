@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import Navbar from "./components/layout/Navbar";
 import Alert from "./components/layout/Alert";
 import Users from "./components/users/Users";
@@ -8,6 +8,7 @@ import Search from "./components/users/Search";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import About from "./components/pages/About";
 import GithubState from "./context/github/githubState";
+import AlertState from "./context/alert/alertState";
 import "./App.css";
 
 const App = () => {
@@ -15,7 +16,7 @@ const App = () => {
   //const [user, setUser] = useState({});
   //const [repos, setRepos] = useState([]);
   // const [loading, setLoading] = useState(false);
-  const [alert, setAlert] = useState(null);
+  //const [alert, setAlert] = useState(null);
 
   // async componentDidMount() {
   //   this.setState({
@@ -30,58 +31,54 @@ const App = () => {
   //   });
   // }
 
-  // Set Alert
-  const showAlert = (msg, type) => {
-    setAlert({ msg, type });
-    setTimeout(() => setAlert(null), 5000);
-  };
-
   return (
     <GithubState>
-      <Router>
-        <div className="App">
-          <Navbar />
-          <div className="container">
-            <Alert alert={alert} />
-            <Switch>
-              <Route
-                exact
-                path="/"
-                render={(props) => (
-                  <Fragment>
-                    <Search
+      <AlertState>
+        <Router>
+          <div className="App">
+            <Navbar />
+            <div className="container">
+              <Alert />
+              <Switch>
+                <Route
+                  exact
+                  path="/"
+                  render={(props) => (
+                    <Fragment>
+                      <Search
                       // searchUsers={searchUsers} sent using CONTEXT
                       //clearUsers={clearUsers}
                       //showClear={users.length > 0 ? true : false}
-                      showAlert={showAlert}
-                    />
-                    <Users
-                    //loading={loading}
-                    //users={users}
-                    />
-                  </Fragment>
-                )}
-              />
-              <Route exact path="/about" component={About} />
-              <Route
-                exact
-                path="/user/:login"
-                component={User}
-                // render={(props) => (
-                //   <User
-                //     {...props}
-                //     //getUser={getUser}
-                //     //getUserRepos={getUserRepos}
-                //     //user={user}
-                //     //repos={repos}
-                //     //loading={loading}
-                //   />
-                // )}
-              />
-            </Switch>
+                      //showAlert={showAlert}
+                      />
+                      <Users
+                      //loading={loading}
+                      //users={users}
+                      />
+                    </Fragment>
+                  )}
+                />
+                <Route exact path="/about" component={About} />
+                <Route
+                  exact
+                  path="/user/:login"
+                  component={User}
+                  // render={(props) => (
+                  //   <User
+                  //     {...props}
+                  //     //getUser={getUser}
+                  //     //getUserRepos={getUserRepos}
+                  //     //user={user}
+                  //     //repos={repos}
+                  //     //loading={loading}
+                  //   />
+                  // )}
+                />
+              </Switch>
+            </div>
           </div>
-        </div>
-      </Router>
+        </Router>
+      </AlertState>
     </GithubState>
   );
 };
