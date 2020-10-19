@@ -1,5 +1,4 @@
 import React, { useEffect, Fragment, useContext } from "react";
-//import PropTypes from "prop-types";
 import Spinner from "../layout/Spinner";
 import Repos from "../repos/Repos";
 import { Link } from "react-router-dom";
@@ -102,11 +101,4 @@ const User = ({ match }) => {
   );
 };
 
-// User.propTypes = {
-//   //loading: PropTypes.bool.isRequired,
-//   //user: PropTypes.object.isRequired,
-//   repos: PropTypes.array.isRequired,
-//   //getUser: PropTypes.func.isRequired,
-//   getUserRepos: PropTypes.func.isRequired,
-// };
 export default User;
